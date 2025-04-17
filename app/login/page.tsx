@@ -1,58 +1,131 @@
-import Link from 'next/link';
+"use client";
 
-export default function Home() {
+import Image from "next/image";
+import Link from "next/link";
+import { FormEvent, useState } from "react";
+
+export default function LoginPage() {
+  const [credentials, setCredentials] = useState({
+    studentId: "",
+    password: "",
+  });
+
   return (
-    <div className="w-screen bg-white bg-cover bg-[url(/initial/building.png)] bg-center text-gray-500 flex flex-col items-center pt-2 gap-y-4 overflow-x-hidden relative">
-      <img 
-        src="/initial/tcu_gray.png" 
-        className="absolute top-0 left-0 w-[50%] h-[80%] z-0 invisible md:visible" 
-      />
+    <main className="min-h-screen bg-white relative">
+      <div className="absolute inset-0 bg-[url(/initial/building.png)] bg-center bg-cover opacity-50" />
 
-      <div className='w-full flex flex-row h-23 md:h-25 bg-red-500 justify-between items-center z-10'>
-            <img src="/initial/name.png" alt="tcu name" className='h-[120px] w-[160px] ml-2'/>
-            
-            <div className='flex flex-row items-center justify-center gap-x-1'>
-                <img src="/initial/ssc.png" alt="ssc logo" className='mr-[-35px] md:mr-[-55px] w-[90px] h-[70px] md:w-[140px] md:h-[90px]'/>
-                <img src="/initial/tcu.png" alt="tcu logo" className='mr-[-15px] md:mr-[0px] w-[90px] h-[70px] md:w-[140px] md:h-[90px]'/>
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Header */}
+        <header className="w-full h-[120px] bg-red-500 px-4 py-2 flex justify-between items-center">
+          <Image
+            src="/initial/name.png"
+            alt="TCU name"
+            width={160}
+            height={120}
+            className="h-[120px] w-auto"
+            priority
+          />
+
+          <div className="flex items-center">
+            <Image
+              src="/initial/ssc.png"
+              alt="SSC logo"
+              width={140}
+              height={90}
+              className="w-[90px] h-auto md:w-[140px]"
+            />
+            <Image
+              src="/initial/tcu.png"
+              alt="TCU logo"
+              width={140}
+              height={90}
+              className="w-[90px] h-auto md:w-[140px]"
+            />
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8 max-w-md mx-auto w-full">
+          <div className="text-center mb-6">
+            <p className="text-xs text-gray-500 opacity-80">
+              YOUR UNIVERSITY <br /> FIRST EVER
+            </p>
+            <Image
+              src="/initial/voting.png"
+              alt="Voting"
+              width={420}
+              height={250}
+              className="mx-auto"
+            />
+          </div>
+
+          <form className="w-full space-y-6">
+            <div className="space-y-2">
+              <label
+                htmlFor="student-id"
+                className="block text-sm text-start text-black font-bold"
+              >
+                STUDENT ID
+              </label>
+              <input
+                type="text"
+                id="student-id"
+                value={credentials.studentId}
+                onChange={(e) =>
+                  setCredentials({ ...credentials, studentId: e.target.value })
+                }
+                className="text-black w-full h-10 px-3 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
+                placeholder="Student ID"
+                required
+              />
             </div>
-      </div>
 
-      <div className='flex flex-col'>
-          <p className='text-center text-[10px] mb-[-10px] z-10 mt-4 opacity-80'>YOUR UNIVERSITY <br/> FIRST EVER</p>
-          <img 
-            src="/initial/voting.png" 
-            alt="text" 
-            className='w-[150px] h-[150px] z-5'
-          />
-      </div>
+            <div className="space-y-2">
+              <label
+                htmlFor="password"
+                className="block text-sm text-start text-black font-bold"
+              >
+                PASSWORD
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={credentials.password}
+                onChange={(e) =>
+                  setCredentials({ ...credentials, password: e.target.value })
+                }
+                className="text-black w-full h-10 px-3 border border-gray-300 rounded focus:outline-none focus:border-gray-500"
+                placeholder="Password"
+                required
+              />
+            </div>
 
-      <div className='w-[80%] h-auto flex flex-col gap-y-4  items-center justify-center'>
-        <div className='w-full flex flex-col justify-center items-center'>
-          <input 
-            type="text" 
-            name='student-id'
-            className='border-1 border-gray-500 w-full h-9 max-w-[450px] px-2'                
-          />
-          <label htmlFor="student-id">STUDENT ID</label>
+            <button
+              type="button"
+              className="w-full text-gray-500 text-sm underline"
+            >
+              Forget Password?
+            </button>
+
+            <button
+              type="submit"
+              className="w-full bg-gray-500 py-3 px-12 text-xl font-bold text-white rounded-lg hover:bg-gray-600 transition-colors"
+            >
+              LOG IN
+            </button>
+          </form>
+
+          <p className="text-sm text-gray-500 mt-6">
+            Don't have an account yet?{" "}
+            <Link
+              href="/register"
+              className="underline text-blue-500 hover:text-blue-600"
+            >
+              Create Account
+            </Link>
+          </p>
         </div>
-    
-        <div className='w-full flex flex-col justify-center items-center'>
-          <input 
-            type="password" 
-            name='password'
-            className='border-1 border-gray-500 w-full h-9 max-w-[450px] px-2'
-          />                
-          <label htmlFor="password">PASSWORD</label>
-        </div>
       </div>
-
-      <button className='underline'>Forget Password?</button>
-            
-      <button className="bg-gray-500 py-3 px-12 text-xl font-bold text-gray-100 rounded-full">LOG IN</button>
-      <p className='text-sm md:text-md mb-6 mt-2'>
-        Don't have an account yet?{" "}
-        <Link href="/register" className='underline text-blue-500'>Create Account</Link>
-      </p>
-    </div>  
+    </main>
   );
 }
