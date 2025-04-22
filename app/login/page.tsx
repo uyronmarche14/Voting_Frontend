@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import Header from "../components/header";
 
 export default function LoginPage() {
   const [credentials, setCredentials] = useState({
@@ -14,35 +15,9 @@ export default function LoginPage() {
     <main className="min-h-screen bg-white relative">
       <div className="absolute inset-0 bg-[url(/initial/building.png)] bg-center bg-cover opacity-50" />
 
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col min-h-screen pt-36">
         {/* Header */}
-        <header className="w-full h-[120px] bg-red-500 px-4 py-2 flex justify-between items-center">
-          <Image
-            src="/initial/name.png"
-            alt="TCU name"
-            width={160}
-            height={120}
-            className="h-[120px] w-auto"
-            priority
-          />
-
-          <div className="flex items-center">
-            <Image
-              src="/initial/ssc.png"
-              alt="SSC logo"
-              width={140}
-              height={90}
-              className="w-[90px] h-auto md:w-[140px]"
-            />
-            <Image
-              src="/initial/tcu.png"
-              alt="TCU logo"
-              width={140}
-              height={90}
-              className="w-[90px] h-auto md:w-[140px]"
-            />
-          </div>
-        </header>
+        <Header />
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8 max-w-md mx-auto w-full">
