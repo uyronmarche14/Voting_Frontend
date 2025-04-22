@@ -1,5 +1,5 @@
 import Header from "../components/header";
-import CandidateContainer from "../components/choices/candidateContainer";
+import CandidateContainer from "../components/choices/CandidateContainer";
 
 export default function index () {
     return <main className="bg-gray-100 pb-10 pt-42 flex flex-col items-center bg-[url(/initial/building.png)] bg-center bg-cover">
